@@ -23,7 +23,7 @@ export default function ForgotPasswordPage() {
                     <h1 className="text-2xl font-semibold tracking-tight">Check your email</h1>
                     <div className="relative w-32 h-32">
                         <Image
-                            src="https://i.imgur.com/OR2t0Vr.png" // Illustration for email sent
+                            src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" // Illustration for email sent
                             alt="Email sent illustration"
                             fill
                             className="object-contain"

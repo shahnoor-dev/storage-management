@@ -22,7 +22,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
             </p>
             <div className="relative w-full max-w-sm h-64 mt-8">
                  <Image 
-                    src="https://i.imgur.com/2JKC3pS.png"
+                    src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                     alt="File Management Illustration"
                     fill
                     className="object-contain"

@@ -1,103 +1,153 @@
+"use client";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  FileText,
+  ImageIcon,
+  Video,
+  MoreHorizontal,
+  Plus,
+  Copy,
+  Facebook,
+  Twitter,
+  Instagram,
+} from "lucide-react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { StorageChart } from "@/components/shared/storage-chart";
+import { StorageItemCard } from "@/components/shared/storage-item-card"; // Import the new component
 
-export default function Home() {
+const contacts = [
+  { name: "Alice Emma", email: "emmaart1234@gmail.com", avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+  { name: "Anne Jennifer", email: "jennifer@gmail.com", avatar: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+  { name: "Bush Matthew", email: "matthew0909@gmail.com", avatar: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+  { name: "Henry Rebecca", email: "henryrebecca1234@gmail.com", avatar: "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+  { name: "George Michael", email: "art1234@gmail.com", avatar: "https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+  { name: "Robert Laura", email: "lauraaurora@gmail.com", avatar: "https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+];
+
+const storageItems = [
+    { title: "Documents", icon: FileText, size: "12 GB", lastUpdate: "10:15am, 10 Oct", color: "bg-red-200", iconColor: "text-red-500" },
+    { title: "Images", icon: ImageIcon, size: "20 GB", lastUpdate: "10:15am, 10 Oct", color: "bg-blue-200", iconColor: "text-blue-500" },
+    { title: "Video, Audio", icon: Video, size: "20 GB", lastUpdate: "10:15am, 10 Oct", color: "bg-green-200", iconColor: "text-green-500" },
+    { title: "Others", icon: MoreHorizontal, size: "38 GB", lastUpdate: "10:15am, 10 Oct", color: "bg-purple-200", iconColor: "text-purple-500" },
+];
+
+const chartData = [{ name: "storage", value: 65, fill: "#ffffff" }];
+
+export default function Dashboard() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {/* Main Content Area */}
+        <div className="lg:col-span-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {/* Available Storage Card */}
+                <Card className="lg:col-span-2 bg-blue-500 text-white">
+                    <CardContent className="flex items-center justify-between p-6">
+                        <div className="relative h-40 w-40">
+                            <StorageChart data={chartData} />
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                <span className="text-3xl font-bold">65%</span>
+                                <span className="text-sm opacity-75">Space used</span>
+                            </div>
+                        </div>
+                        <div className="text-right">
+                            <p className="text-lg font-semibold">Available Storage</p>
+                            <p className="text-md opacity-75">82GB / 128GB</p>
+                        </div>
+                    </CardContent>
+                </Card>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+                {/* Use the new reusable component */}
+                {storageItems.map((item) => (
+                    <StorageItemCard key={item.title} item={item} />
+                ))}
+            </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Right Sidebar Area */}
+        <div className="lg:col-span-1 space-y-4">
+            {/* Contact Card */}
+            <Card>
+                <CardHeader className="flex flex-row items-center justify-between">
+                    <CardTitle>Contact</CardTitle>
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button size="icon" variant="ghost" className="rounded-full">
+                                <Plus className="h-4 w-4" />
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px]">
+                            <DialogHeader>
+                            <DialogTitle>Add Contact</DialogTitle>
+                            <DialogDescription>
+                                Please enter email
+                            </DialogDescription>
+                            </DialogHeader>
+                            <div className="grid gap-4 py-4">
+                            <div className="grid grid-cols-4 items-center gap-4">
+                                <Label htmlFor="email" className="text-right">
+                                Email
+                                </Label>
+                                <Input id="email" defaultValue="davidnguyen@gmail.com" className="col-span-3" />
+                            </div>
+                            </div>
+                            <DialogFooter>
+                            <Button type="submit" className="w-full">Add</Button>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                    {contacts.map((contact) => (
+                        <div key={contact.email} className="flex items-center gap-4">
+                            <Image src={contact.avatar} alt={contact.name} height={40} width={40} className="rounded-full flex-none h-10 w-10 object-cover" />
+                            <div>
+                                <p className="font-semibold">{contact.name}</p>
+                                <p className="text-sm text-muted-foreground">{contact.email}</p>
+                            </div>
+                        </div>
+                    ))}
+                </CardContent>
+            </Card>
+
+            {/* Invite a Friend Card */}
+            <Card>
+                <CardHeader>
+                    <CardTitle>Invite a Friend</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                    <div className="flex items-center space-x-2">
+                        <Input value="HKP109BHUO5THI2" readOnly />
+                        <Button variant="outline" size="icon">
+                            <Copy className="h-4 w-4" />
+                        </Button>
+                    </div>
+                    <div className="flex justify-center space-x-4">
+                        <Button variant="outline" size="icon" className="rounded-full"><Facebook className="h-4 w-4" /></Button>
+                        <Button variant="outline" size="icon" className="rounded-full"><Twitter className="h-4 w-4" /></Button>
+                        <Button variant="outline" size="icon" className="rounded-full"><Instagram className="h-4 w-4" /></Button>
+                    </div>
+                </CardContent>
+            </Card>
+        </div>
     </div>
   );
 }
