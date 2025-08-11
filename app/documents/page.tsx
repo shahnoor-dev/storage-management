@@ -22,19 +22,31 @@ import { cn } from "@/lib/utils";
 import { FileCard } from "@/components/shared/file-card";
 import { FileRow } from "@/components/shared/file-row";
 
-const documents = [
-    { name: 'App School.fig', size: '2 GB', date: '10:09pm, 10 Oct', icon: 'https://cdn.iconscout.com/icon/free/png-256/free-figma-3521426-2945072.png' },
-    { name: 'BC company.sketch', size: '2 GB', date: '10:09pm, 10 Oct', icon: 'https://cdn.iconscout.com/icon/free/png-256/free-sketch-3521528-2945174.png' },
-    { name: 'B.UI.xd', size: '15 MB', date: '10:09pm, 10 Oct', icon: 'https://cdn.iconscout.com/icon/free/png-256/free-adobe-xd-3521233-2944854.png' },
-    { name: 'CompanyANV.fig', size: '2 GB', date: '10:09pm, 10 Oct', icon: 'https://cdn.iconscout.com/icon/free/png-256/free-figma-3521426-2945072.png' },
-    { name: 'company ABC.sketch', size: '6 MB', date: '10:09pm, 10 Oct', icon: 'https://cdn.iconscout.com/icon/free/png-256/free-sketch-3521528-2945174.png' },
-    { name: 'My CV.pdf', size: '2 GB', date: '10:09pm, 10 Oct', icon: 'https://cdn.iconscout.com/icon/free/png-256/free-pdf-3521489-2945135.png' },
-    { name: 'My Jobs.fig', size: '2 GB', date: '10:09pm, 10 Oct', icon: 'https://cdn.iconscout.com/icon/free/png-256/free-figma-3521426-2945072.png' },
-    { name: 'Photoshop.xd', size: '2 GB', date: '10:09pm, 10 Oct', icon: 'https://cdn.iconscout.com/icon/free/png-256/free-adobe-xd-3521233-2944854.png' },
+const initialDocuments = [
+    { id: '1', name: 'App School.fig', size: '2 GB', date: '10:09pm, 10 Oct', icon: 'https://cdn.iconscout.com/icon/free/png-256/free-figma-3521426-2945072.png', format: 'sketch', dimensions: '20.2 MB', owner: 'David', lastEdit: '10:09pm, 10 Oct' },
+    { id: '2', name: 'BC company.sketch', size: '2 GB', date: '10:09pm, 10 Oct', icon: 'https://cdn.iconscout.com/icon/free/png-256/free-sketch-3521528-2945174.png', format: 'sketch', dimensions: '22.4 MB', owner: 'David', lastEdit: '10:15pm, 10 Oct' },
+    { id: '3', name: 'B.UI.xd', size: '15 MB', date: '10:09pm, 10 Oct', icon: 'https://cdn.iconscout.com/icon/free/png-256/free-adobe-xd-3521233-2944854.png', format: 'xd', dimensions: '18.1 MB', owner: 'Mitchel', lastEdit: '11:00am, 09 Oct' },
 ];
 
 export default function DocumentsPage() {
-    const [view, setView] = useState('grid'); // Default to list view to match image
+    const [view, setView] = useState('list');
+    const [files, setFiles] = useState(initialDocuments);
+
+    const handleRenameFile = (fileId: string, newName: string) => {
+        setFiles(currentFiles => 
+            currentFiles.map(file => {
+                if (file.id === fileId) {
+                    const extension = file.name.split('.').pop();
+                    return { ...file, name: `${newName}.${extension}` };
+                }
+                return file;
+            })
+        );
+    };
+
+    const handleDeleteFile = (fileId: string) => {
+        setFiles(currentFiles => currentFiles.filter(file => file.id !== fileId));
+    };
 
     return (
         <Card className="p-6 rounded-3xl shadow-lg shadow-gray-100/70 border-gray-100">
@@ -75,12 +87,12 @@ export default function DocumentsPage() {
                     "grid gap-4",
                     view === 'grid' 
                         ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" 
-                        : "grid-cols-1 md:grid-cols-2 xl:grid-cols-3" // Corrected list view columns
+                        : "grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
                 )}>
-                    {documents.map((doc) => (
+                    {files.map((file) => (
                         view === 'grid' 
-                            ? <FileCard key={doc.name} file={doc} /> 
-                            : <FileRow key={doc.name} file={doc} />
+                            ? <FileCard key={file.id} file={file} onRename={handleRenameFile} onDelete={handleDeleteFile} /> 
+                            : <FileRow key={file.id} file={file} onRename={handleRenameFile} onDelete={handleDeleteFile} />
                     ))}
                 </div>
             </CardContent>

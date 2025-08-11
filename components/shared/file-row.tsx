@@ -1,21 +1,28 @@
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { FileActions } from "./file-actions"; // Import the new component
+import { FileActions } from "./file-actions";
 
 interface FileItem {
+    id: string;
     name: string;
     size: string;
     date: string;
     icon: string;
     previewSrc?: string;
+    format?: string;
+    dimensions?: string;
+    owner?: string;
+    lastEdit?: string;
 }
 
 interface FileRowProps {
     file: FileItem;
+    onRename: (fileId: string, newName: string) => void;
+    onDelete: (fileId: string) => void;
 }
 
-export function FileRow({ file }: FileRowProps) {
+export function FileRow({ file, onRename, onDelete }: FileRowProps) {
     return (
         <Card className="p-3 flex items-center justify-between rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="flex items-center gap-4">
@@ -34,8 +41,7 @@ export function FileRow({ file }: FileRowProps) {
                 </div>
             </div>
             
-            {/* Use the new reusable component */}
-            <FileActions file={file} />
+            <FileActions file={file} onRename={onRename} onDelete={onDelete} />
         </Card>
     );
 }
