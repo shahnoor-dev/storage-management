@@ -1,9 +1,10 @@
 "use client";
 
+import { useState } from "react"; // Import useState
+import { toast } from "sonner"; // Import toast
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -12,35 +13,23 @@ import {
   ImageIcon,
   Video,
   MoreHorizontal,
-  Plus,
   Copy,
+  Check, // Import Check icon
   Facebook,
   Twitter,
   Instagram,
 } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { StorageChart } from "@/components/shared/storage-chart";
-import { StorageItemCard } from "@/components/shared/storage-item-card"; // Import the new component
+import { StorageItemCard } from "@/components/shared/storage-item-card";
+import { AddContactDialog } from "@/components/shared/add-contact-dialog";
 
-const contacts = [
+const initialContacts = [
   { name: "Alice Emma", email: "emmaart1234@gmail.com", avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
   { name: "Anne Jennifer", email: "jennifer@gmail.com", avatar: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
   { name: "Bush Matthew", email: "matthew0909@gmail.com", avatar: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-  { name: "Henry Rebecca", email: "henryrebecca1234@gmail.com", avatar: "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-  { name: "George Michael", email: "art1234@gmail.com", avatar: "https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-  { name: "Robert Laura", email: "lauraaurora@gmail.com", avatar: "https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
 ];
 
 const storageItems = [
@@ -53,12 +42,27 @@ const storageItems = [
 const chartData = [{ name: "storage", value: 65, fill: "#ffffff" }];
 
 export default function Dashboard() {
+    const [contacts, setContacts] = useState(initialContacts);
+    const [copied, setCopied] = useState(false);
+    const referralCode = "HKP109BHUO5THI2";
+
+    const handleAddContact = (newContact: { name: string; email: string; avatar: string; }) => {
+        setContacts(prevContacts => [newContact, ...prevContacts]);
+    };
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(referralCode).then(() => {
+            toast("Referral code copied to clipboard!");
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+        });
+    };
+
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {/* Main Content Area */}
         <div className="lg:col-span-3">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {/* Available Storage Card */}
                 <Card className="lg:col-span-2 bg-blue-500 text-white">
                     <CardContent className="flex items-center justify-between p-6">
                         <div className="relative h-40 w-40">
@@ -74,8 +78,6 @@ export default function Dashboard() {
                         </div>
                     </CardContent>
                 </Card>
-
-                {/* Use the new reusable component */}
                 {storageItems.map((item) => (
                     <StorageItemCard key={item.title} item={item} />
                 ))}
@@ -84,36 +86,10 @@ export default function Dashboard() {
 
         {/* Right Sidebar Area */}
         <div className="lg:col-span-1 space-y-4">
-            {/* Contact Card */}
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
                     <CardTitle>Contact</CardTitle>
-                    <Dialog>
-                        <DialogTrigger asChild>
-                            <Button size="icon" variant="ghost" className="rounded-full">
-                                <Plus className="h-4 w-4" />
-                            </Button>
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-[425px]">
-                            <DialogHeader>
-                            <DialogTitle>Add Contact</DialogTitle>
-                            <DialogDescription>
-                                Please enter email
-                            </DialogDescription>
-                            </DialogHeader>
-                            <div className="grid gap-4 py-4">
-                            <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="email" className="text-right">
-                                Email
-                                </Label>
-                                <Input id="email" defaultValue="davidnguyen@gmail.com" className="col-span-3" />
-                            </div>
-                            </div>
-                            <DialogFooter>
-                            <Button type="submit" className="w-full">Add</Button>
-                            </DialogFooter>
-                        </DialogContent>
-                    </Dialog>
+                    <AddContactDialog onAddContact={handleAddContact} />
                 </CardHeader>
                 <CardContent className="space-y-4">
                     {contacts.map((contact) => (
@@ -135,9 +111,9 @@ export default function Dashboard() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="flex items-center space-x-2">
-                        <Input value="HKP109BHUO5THI2" readOnly />
-                        <Button variant="outline" size="icon">
-                            <Copy className="h-4 w-4" />
+                        <Input value={referralCode} readOnly />
+                        <Button variant="outline" size="icon" onClick={handleCopy}>
+                            {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
                         </Button>
                     </div>
                     <div className="flex justify-center space-x-4">
