@@ -42,7 +42,7 @@ export default function DashboardLayout({
               <div 
                   className={cn(
                       "flex flex-col sm:gap-4 sm:py-4 transition-all duration-300",
-                      isSettingsPage ? "sm:pl-64" : (isCollapsed ? "sm:pl-14" : "sm:pl-64")
+                      isCollapsed ? "sm:pl-14" : "sm:pl-64"
                   )}
               >
                   <Header 

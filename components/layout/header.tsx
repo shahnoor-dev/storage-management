@@ -65,12 +65,12 @@ export default function Header({ isCollapsed, toggleSidebar }: HeaderProps) {
         {isCollapsed ? <PanelRightClose className="h-5 w-5" /> : <PanelLeftClose className="h-5 w-5" />}
       </Button>
 
-      <div className="relative ml-auto flex-1 md:grow-0">
+      <div className="relative flex-1 md:grow-0">
         <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
         <Input
           type="search"
           placeholder="Search..."
-          className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
+          className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[520px]"
         />
       </div>
       <Button variant="default" className="ml-auto">
@@ -85,7 +85,7 @@ export default function Header({ isCollapsed, toggleSidebar }: HeaderProps) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-48 p-2">
             <DropdownMenuItem className="py-2">
-                <Link href={"/accounting"}>Profile</Link>
+                <Link href={"/account"}>Profile</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <div className="px-2 py-1.5">

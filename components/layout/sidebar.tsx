@@ -1,28 +1,28 @@
 "use client";
 
 import {
-  LayoutDashboard,
-  FileText,
-  ImageIcon,
-  Video,
-  MoreHorizontal,
-  Settings,
-  User,
-  Clock,
-  UserPlus,
-  Trash2,
-  Bell,
-  LogOut,
-  ArrowLeft
+    LayoutDashboard,
+    FileText,
+    ImageIcon,
+    Video,
+    MoreHorizontal,
+    Settings,
+    User,
+    Clock,
+    UserPlus,
+    Trash2,
+    Bell,
+    LogOut,
+    ArrowLeft
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Button } from "../ui/button";
 import { Switch } from "../ui/switch";
@@ -56,46 +56,43 @@ export default function Sidebar({ isCollapsed }: SidebarProps) {
     const navItems = isSettingsPage ? settingsNavItems : mainNavItems;
 
     return (
-        <aside 
+        <aside
             className={cn(
                 "fixed inset-y-0 left-0 z-10 hidden flex-col border-r bg-background transition-all duration-300 sm:flex",
                 isCollapsed ? "w-14" : "w-64 p-6"
             )}
         >
-            <div className={cn("flex flex-col gap-4 h-full", isCollapsed ? "items-center px-2 py-5" : "items-start")}>
+            <div className={cn("flex flex-col h-full", isCollapsed ? "items-center px-2 py-5" : "items-start")}>
                 {/* Top Section */}
                 <div>
-                    {isSettingsPage ? (
-                        isCollapsed ? (
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Link href="/" className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-accent">
-                                        <ArrowLeft className="h-5 w-5" />
-                                        <span className="sr-only">Back to Dashboard</span>
-                                    </Link>
-                                </TooltipTrigger>
-                                <TooltipContent side="right">Back to Dashboard</TooltipContent>
-                            </Tooltip>
-                        ) : (
-                            <Button asChild variant="outline" className="w-full mb-4">
-                                <Link href="/" className="flex items-center gap-2">
-                                    <ArrowLeft className="h-4 w-4" />
-                                    Back to Dashboard
-                                </Link>
-                            </Button>
-                        )
-                    ) : (
-                        <Link href="/" className={cn("flex items-center gap-2", isCollapsed ? "" : "mb-4")}>
-                            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
-                                <div className="w-4 h-4 rounded-full bg-white"></div>
-                            </div>
-                            <h1 className={cn("text-xl font-bold text-blue-500", isCollapsed && "hidden")}>Storage</h1>
-                        </Link>
-                    )}
+                    <Link href="/" className={cn("flex items-center gap-2 mb-16")}>
+                        <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
+                            <div className="w-4 h-4 rounded-full bg-white"></div>
+                        </div>
+                        <h1 className={cn("text-xl font-bold text-blue-500", isCollapsed && "hidden")}>Storage</h1>
+                    </Link>
                 </div>
 
                 {/* Navigation Section */}
-                <nav className="flex flex-col gap-2 w-full">
+                <nav className="flex flex-col gap-5 w-full">
+                    {isSettingsPage && (isCollapsed ? (
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link href="/" className="flex h-9 w-9 items-center justify-center rounded-full shadow-md text-muted-foreground transition-colors hover:bg-accent">
+                                    <ArrowLeft className="h-5 w-5" />
+                                    <span className="sr-only">Back to Dashboard</span>
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent side="right">Back to Dashboard</TooltipContent>
+                        </Tooltip>
+                    ) : (
+                        <Link href="/" className="flex items-center gap-2">
+                            <div className="h-11 w-11 flex items-center justify-center shadow-md rounded-full">
+                                <ArrowLeft className="h-4 w-4" />
+                            </div>
+                            Back to Dashboard
+                        </Link>
+                    ))}
                     {navItems.map((item) => {
                         const isActive = pathname === item.href;
                         return (
@@ -133,14 +130,6 @@ export default function Sidebar({ isCollapsed }: SidebarProps) {
                             <div className="flex flex-col gap-2 items-center">
                                 <Tooltip>
                                     <TooltipTrigger asChild>
-                                        <Button variant="ghost" size="icon" className="h-9 w-9 rounded-lg text-muted-foreground hover:bg-accent">
-                                            <Bell className="h-5 w-5" />
-                                        </Button>
-                                    </TooltipTrigger>
-                                    <TooltipContent side="right">Push Notification</TooltipContent>
-                                </Tooltip>
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
                                         <Button variant="ghost" size="icon" className="h-9 w-9 rounded-lg text-red-500 hover:bg-accent hover:text-red-600">
                                             <LogOut className="h-5 w-5" />
                                         </Button>
@@ -150,13 +139,6 @@ export default function Sidebar({ isCollapsed }: SidebarProps) {
                             </div>
                         ) : (
                             <div className="flex flex-col gap-4">
-                                <div className="flex items-center justify-between rounded-lg px-3 py-2 text-muted-foreground">
-                                    <Label htmlFor="push-notifications" className="flex items-center gap-3">
-                                        <Bell className="h-5 w-5" />
-                                        Push Notification
-                                    </Label>
-                                    <Switch id="push-notifications" />
-                                </div>
                                 <Button variant="outline" className="w-full text-red-500 hover:text-red-600">
                                     <LogOut className="mr-2 h-5 w-5" />
                                     Logout
@@ -165,7 +147,7 @@ export default function Sidebar({ isCollapsed }: SidebarProps) {
                         )
                     ) : (
                         !isCollapsed && (
-                            <Image 
+                            <Image
                                 src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                                 alt="Abstract background"
                                 width={200}
