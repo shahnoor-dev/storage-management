@@ -2,12 +2,13 @@
 
 import { useState, useRef } from "react";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardFooter,
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+    CardFooter,
 } from "@/components/ui/card";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -57,7 +58,7 @@ export default function AccountSettingsPage() {
 
     const handleSaveChanges = () => {
         console.log("Saving data:", { ...userData, avatar: avatarPreview });
-        alert("Changes saved!");
+        toast("Account settings have been saved."); // Replace alert
     };
 
     const handleCancel = () => {
@@ -68,31 +69,31 @@ export default function AccountSettingsPage() {
     return (
         <Card className="p-6 rounded-3xl shadow-lg shadow-gray-100/70 border-gray-100">
             <div className="flex items-center justify-between mb-6">
-                    <div>
-                        <h2 className="text-2xl font-bold">Account Settings</h2>
-                    </div>
+                <div>
+                    <h2 className="text-2xl font-bold">Account Settings</h2>
                 </div>
+            </div>
             <CardContent className="flex flex-col gap-8">
                 {/* Left Side: Avatar */}
-                    <div className="relative w-max">
-                        <Image 
-                            src={avatarPreview} 
-                            alt="User Avatar" 
-                            width={152} 
-                            height={152} 
-                            className="rounded-full object-cover w-38 h-38"
-                        />
-                        <Button size="icon" className="absolute bottom-1 right-1 rounded-full h-8 w-8 bg-blue-500 hover:bg-blue-600" onClick={handleAvatarClick}>
-                            <Camera className="h-4 w-4" />
-                        </Button>
-                        <input
-                            type="file"
-                            ref={fileInputRef}
-                            onChange={handleAvatarChange}
-                            className="hidden"
-                            accept="image/*"
-                        />
-                    </div>
+                <div className="relative w-max">
+                    <Image
+                        src={avatarPreview}
+                        alt="User Avatar"
+                        width={152}
+                        height={152}
+                        className="rounded-full object-cover w-38 h-38"
+                    />
+                    <Button size="icon" className="absolute bottom-1 right-1 rounded-full h-8 w-8 bg-blue-500 hover:bg-blue-600" onClick={handleAvatarClick}>
+                        <Camera className="h-4 w-4" />
+                    </Button>
+                    <input
+                        type="file"
+                        ref={fileInputRef}
+                        onChange={handleAvatarChange}
+                        className="hidden"
+                        accept="image/*"
+                    />
+                </div>
 
                 {/* Right Side: Form */}
                 <div className="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6">

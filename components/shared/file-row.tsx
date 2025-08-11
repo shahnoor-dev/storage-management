@@ -3,6 +3,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { FileActions } from "./file-actions";
 
+// Update the interface to include id and optional details
 interface FileItem {
     id: string;
     name: string;
@@ -16,13 +17,17 @@ interface FileItem {
     lastEdit?: string;
 }
 
+// The props for the component now include the new optional functions and context
 interface FileRowProps {
     file: FileItem;
     onRename: (fileId: string, newName: string) => void;
     onDelete: (fileId: string) => void;
+    onRestore?: (fileId: string) => void;
+    onDeletePermanently?: (fileId: string) => void;
+    context?: "default" | "trash";
 }
 
-export function FileRow({ file, onRename, onDelete }: FileRowProps) {
+export function FileRow({ file, onRename, onDelete, onRestore, onDeletePermanently, context }: FileRowProps) {
     return (
         <Card className="p-3 flex items-center justify-between rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="flex items-center gap-4">
@@ -41,7 +46,14 @@ export function FileRow({ file, onRename, onDelete }: FileRowProps) {
                 </div>
             </div>
             
-            <FileActions file={file} onRename={onRename} onDelete={onDelete} />
+            <FileActions 
+                file={file} 
+                onRename={onRename} 
+                onDelete={onDelete}
+                onRestore={onRestore}
+                onDeletePermanently={onDeletePermanently}
+                context={context}
+            />
         </Card>
     );
 }

@@ -1,12 +1,14 @@
-"use client"; // This must be a client component to manage state and effects
+"use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "@/components/layout/header";
 import Sidebar from "@/components/layout/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/components/ui/sonner"; // Import the Toaster
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -15,18 +17,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Default to collapsed on the server to avoid layout shifts
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isClient, setIsClient] = useState(false);
+  const pathname = usePathname();
+  const isSettingsPage = pathname.startsWith('/account') || pathname.startsWith('/recent') || pathname.startsWith('/invite') || pathname.startsWith('/trash') || pathname.startsWith('/history');
 
-  // This effect runs only on the client, after the initial render
   useEffect(() => {
     setIsClient(true);
     const userPreference = localStorage.getItem('sidebar-collapsed');
     if (userPreference) {
       setIsCollapsed(userPreference === 'true');
     } else {
-      // Default to expanded on desktop if no preference is saved
       setIsCollapsed(window.innerWidth < 1024);
     }
   }, []);
@@ -45,7 +46,6 @@ export default function RootLayout({
           inter.variable
         )}
       >
-        {/* By checking isClient, we prevent FOUC */}
         {isClient ? (
             <TooltipProvider delayDuration={0}>
                 <div className="flex min-h-screen w-full flex-col">
@@ -53,7 +53,7 @@ export default function RootLayout({
                 <div 
                     className={cn(
                         "flex flex-col sm:gap-4 sm:py-4 transition-all duration-300",
-                        isCollapsed ? "sm:pl-14" : "sm:pl-64"
+                        isSettingsPage ? "sm:pl-64" : (isCollapsed ? "sm:pl-14" : "sm:pl-64")
                     )}
                 >
                     <Header 
@@ -67,11 +67,11 @@ export default function RootLayout({
                 </div>
             </TooltipProvider>
         ) : (
-            // You can render a loading skeleton here on the server
             <div className="flex h-screen w-full items-center justify-center">
                 Loading...
             </div>
         )}
+        <Toaster /> {/* Add the Toaster component here */}
       </body>
     </html>
   );
