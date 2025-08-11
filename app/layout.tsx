@@ -1,14 +1,9 @@
-"use client";
+"use client"; // Keep this as a client component for the Toaster
 
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import Header from "@/components/layout/header";
-import Sidebar from "@/components/layout/sidebar";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster } from "@/components/ui/sonner"; // Import the Toaster
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -17,27 +12,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isCollapsed, setIsCollapsed] = useState(true);
-  const [isClient, setIsClient] = useState(false);
-  const pathname = usePathname();
-  const isSettingsPage = pathname.startsWith('/account') || pathname.startsWith('/recent') || pathname.startsWith('/invite') || pathname.startsWith('/trash') || pathname.startsWith('/history');
-
-  useEffect(() => {
-    setIsClient(true);
-    const userPreference = localStorage.getItem('sidebar-collapsed');
-    if (userPreference) {
-      setIsCollapsed(userPreference === 'true');
-    } else {
-      setIsCollapsed(window.innerWidth < 1024);
-    }
-  }, []);
-
-  const toggleSidebar = () => {
-    const newCollapsedState = !isCollapsed;
-    setIsCollapsed(newCollapsedState);
-    localStorage.setItem('sidebar-collapsed', String(newCollapsedState));
-  };
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -46,32 +20,8 @@ export default function RootLayout({
           inter.variable
         )}
       >
-        {isClient ? (
-            <TooltipProvider delayDuration={0}>
-                <div className="flex min-h-screen w-full flex-col">
-                <Sidebar isCollapsed={isCollapsed} />
-                <div 
-                    className={cn(
-                        "flex flex-col sm:gap-4 sm:py-4 transition-all duration-300",
-                        isSettingsPage ? "sm:pl-64" : (isCollapsed ? "sm:pl-14" : "sm:pl-64")
-                    )}
-                >
-                    <Header 
-                        isCollapsed={isCollapsed}
-                        toggleSidebar={toggleSidebar}
-                    />
-                    <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-                    {children}
-                    </main>
-                </div>
-                </div>
-            </TooltipProvider>
-        ) : (
-            <div className="flex h-screen w-full items-center justify-center">
-                Loading...
-            </div>
-        )}
-        <Toaster /> {/* Add the Toaster component here */}
+        {children}
+        <Toaster />
       </body>
     </html>
   );
