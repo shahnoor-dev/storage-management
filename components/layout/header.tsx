@@ -89,16 +89,16 @@ export default function Header({ isCollapsed, toggleSidebar, onUpload, isShowOnM
                         <Image src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width={52} height={52} alt="Avatar" className="overflow-hidden h-13 w-13 shadow-lg rounded-full object-cover" />
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48 p-2">
-                    <DropdownMenuItem className="py-2">
+                <DropdownMenuContent align="end" className="w-64 px-5 border-0 shadow-lg py-3.5 mt-2">
+                    <DropdownMenuItem className="py-[15px] px-2 font-medium">
                         <Link href={"/account"}>Profile</Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <div className="px-2 py-1.5">
+                    <div className="px-2 py-[15px]">
                         <ThemeToggle />
                     </div>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="py-2 text-red-500 hover:!text-red-500">
+                    <DropdownMenuItem className="py-[15px] px-2 font-medium text-red-500 hover:!text-red-500">
                         Logout
                     </DropdownMenuItem>
                 </DropdownMenuContent>
