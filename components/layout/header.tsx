@@ -6,6 +6,7 @@ import {
     Upload,
     PanelLeftClose,
     PanelRightClose,
+    Menu
 } from "lucide-react";
 
 import Link from "next/link";
@@ -19,8 +20,6 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { MobileNav } from "./mobile-nav";
 import Image from "next/image";
 import { ThemeToggle } from "../shared/theme-toggle"; // Import the new component
 
@@ -28,9 +27,11 @@ interface HeaderProps {
     isCollapsed: boolean;
     toggleSidebar: () => void;
     onUpload: (files: FileList) => void;
+    isShowOnMobile: boolean;
+    setIsShowOnMobile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Header({ isCollapsed, toggleSidebar, onUpload }: HeaderProps) {
+export default function Header({ isCollapsed, toggleSidebar, onUpload, isShowOnMobile, setIsShowOnMobile }: HeaderProps) {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleUploadClick = () => {
@@ -42,32 +43,16 @@ export default function Header({ isCollapsed, toggleSidebar, onUpload }: HeaderP
             onUpload(e.target.files);
         }
     };
+
+    const handleShowMobileMenu = () => {
+        setIsShowOnMobile(() => true);
+    }
+
     return (
         <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-            <Sheet>
-                <SheetTrigger asChild>
-                    <Button size="icon" variant="outline" className="sm:hidden">
-                        <MobileNav />
-                        <span className="sr-only">Toggle Menu</span>
-                    </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="sm:max-w-xs">
-                    <nav className="grid gap-6 text-lg font-medium">
-                        <a
-                            href="#"
-                            className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
-                        >
-                            <Image src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="logo" width={24} height={24} />
-                            <span className="sr-only">Storage</span>
-                        </a>
-                        <a href="/" className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">Dashboard</a>
-                        <a href="/documents" className="flex items-center gap-4 px-2.5 text-foreground">Documents</a>
-                        <a href="/images" className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">Images</a>
-                        <a href="/media" className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">Video, Audio</a>
-                        <a href="/others" className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">Others</a>
-                    </nav>
-                </SheetContent>
-            </Sheet>
+            <Button size="icon" variant="outline" className="sm:hidden" onClick={handleShowMobileMenu} >
+                <Menu className="h-5 w-5" />
+            </Button>
 
             <Button
                 variant="outline"
