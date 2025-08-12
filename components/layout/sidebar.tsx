@@ -92,10 +92,10 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isShowOnMobile, s
             <div
                 className={cn(
                     "fixed inset-y-0 sm:left-0 z-40 flex-col bg-background transition-all duration-300 flex",
-                    isCollapsed ? "w-14" : "w-81 px-9 py-8", isShowOnMobile ? "left-0" : "-left-85"
+                    isCollapsed ? "w-21" : "w-81 px-9 py-8", isShowOnMobile ? "left-0" : "-left-85"
                 )}
             >
-                <div className={cn("flex flex-col h-full", isCollapsed ? "items-center px-2 py-8" : "items-start")}>
+                <div className={cn("flex flex-col h-full", isCollapsed ? "items-center px-4 py-8" : "items-start")}>
                     {/* Top Section */}
                     <div>
                         <Link href="/" className={cn("flex items-center gap-3 mb-16")}>
@@ -115,7 +115,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isShowOnMobile, s
                         {isSettingsPage && (isCollapsed ? (
                             <Tooltip>
                                 <TooltipTrigger asChild>
-                                    <Link href="/" className="flex h-9 w-9 items-center justify-center rounded-full shadow-xl text-muted-foreground transition-colors hover:bg-accent">
+                                    <Link href="/" className="flex h-13 w-13 items-center justify-center rounded-full shadow-xl text-muted-foreground transition-colors hover:bg-accent">
                                         <ArrowLeft className="h-5 w-5" />
                                         <span className="sr-only">Back to Dashboard</span>
                                     </Link>
@@ -139,10 +139,10 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isShowOnMobile, s
                                             <TooltipTrigger asChild>
                                                 <Link
                                                     href={item.href}
-                                                    className={cn("flex h-9 w-9 items-center justify-center rounded-full transition-all", isActive ? 'bg-default-band text-white hover:text-white' : 'text-muted-foreground hover:bg-accent')}
+                                                    className={cn("flex h-13 w-13 items-center justify-center rounded-full transition-all", isActive ? 'bg-default-band text-white hover:text-white' : 'text-muted-foreground hover:bg-accent')}
                                                 >
-                                                    <div className={cn(`h-8 w-8 p-[9px] bg-${item.iconBg} rounded-full`)}>
-                                                        <item.icon className={cn("h-[14px] w-[14px] text-white")} />
+                                                    <div className={cn(`h-8 w-8 p-[6px] bg-${item.iconBg} rounded-full`)}>
+                                                        <item.icon className={cn("h-5 w-5 text-white")} />
                                                     </div>
                                                     <span className="sr-only">{item.name}</span>
                                                 </Link>
@@ -176,7 +176,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isShowOnMobile, s
                                             <TooltipTrigger asChild>
                                                 <Link
                                                     href={item.href}
-                                                    className={cn("flex h-9 w-9 items-center justify-center rounded-full transition-all", isActive ? 'bg-blue-500 text-white hover:text-white' : 'text-muted-foreground hover:bg-accent')}
+                                                    className={cn("flex h-13 w-13 items-center justify-center rounded-full transition-all", isActive ? 'bg-default-band text-white hover:text-white' : 'text-muted-foreground hover:bg-accent')}
                                                 >
                                                     <item.icon className="h-5 w-5" />
                                                     <span className="sr-only">{item.name}</span>

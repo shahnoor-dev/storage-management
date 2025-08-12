@@ -97,7 +97,7 @@ export default function DashboardLayout({
                         <div
                             className={cn(
                                 "flex flex-col transition-all duration-300",
-                                isCollapsed ? "sm:pl-14" : "sm:pl-81"
+                                isCollapsed ? "sm:pl-21" : "sm:pl-81"
                             )}
                         >
                             <Header
@@ -107,8 +107,8 @@ export default function DashboardLayout({
                                 isShowOnMobile={isShowOnMobile}
                                 setIsShowOnMobile={setIsShowOnMobile}
                             />
-                            <main className="grid flex-1 items-start gap-4 bg-accent min-h-[calc(100vh-132px)] max-h-[calc(100vh-132px)] w-[calc(100vw-356px)] p-8 rounded-[30px]">
-                                <div className="min-h-[calc(100vh-196px)] max-h-[calc(100vh-196px)] rounded-[24px] max-w-[calc(100vw-388px)] overflow-y-scroll scrollbar-hide">
+                            <main className={cn("grid flex-1 items-start gap-4 bg-accent min-h-[calc(100vh-108px)] sm:min-h-[calc(100vh-132px)] max-h-[calc(100vh-108px)] sm:max-h-[calc(100vh-132px)] p-3 sm:p-8 rounded-[30px]", isCollapsed ? "w-[calc(100vw-116px)]": "mx-auto w-[calc(100vw-24px)] sm:w-[calc(100vw-356px)]")}>
+                                <div className="min-h-[calc(100vh-132px)] max-h-[calc(100vh-132px)] sm:min-h-[calc(100vh-196px)] sm:max-h-[calc(100vh-196px)] rounded-[24px] overflow-y-scroll scrollbar-hide">
                                     {children}
                                 </div>
                             </main>
