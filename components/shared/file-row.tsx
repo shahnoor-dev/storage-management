@@ -29,7 +29,7 @@ interface FileRowProps {
 
 export function FileRow({ file, onRename, onDelete, onRestore, onDeletePermanently, context }: FileRowProps) {
     return (
-        <Card className="p-3 flex items-center justify-between rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
+        <Card className="p-3 flex flex-row items-center justify-between rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="flex items-center gap-4">
                 <div className="bg-gray-100 w-12 h-12 flex items-center justify-center rounded-full overflow-hidden">
                     <Image 
