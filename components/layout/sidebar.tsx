@@ -85,13 +85,13 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isShowOnMobile, s
     return (
         <>
             <div className={cn("fixed min-h-screen min-w-screen bg-black/70 z-40 sm:hidden", isShowOnMobile ? "left-0" : "-left-[110%]")} onClick={handleShowMobileMenu} >
-                <Button size="icon" variant="outline" className="sm:hidden absolute right-8 top-4 flex h-9 w-9 items-center justify-center rounded-full shadow-xl text-muted-foreground transition-colors hover:bg-accent">
-                    <X className="h-5 w-5" />
-                </Button>
             </div>
+            <Button size="icon" variant="outline" className={cn("fixed sm:hidden top-4 z-50 flex h-9 w-9 items-center justify-center rounded-full shadow-xl text-muted-foreground transition-colors hover:bg-accent", isShowOnMobile ? "right-4" : "-right-24")} onClick={handleShowMobileMenu} >
+                <X className="h-5 w-5" />
+            </Button>
             <div
                 className={cn(
-                    "fixed inset-y-0 sm:left-0 z-40 flex-col border-r bg-background transition-all duration-300 flex",
+                    "fixed inset-y-0 sm:left-0 z-40 flex-col bg-background transition-all duration-300 flex",
                     isCollapsed ? "w-14" : "w-81 px-9 py-8", isShowOnMobile ? "left-0" : "-left-85"
                 )}
             >

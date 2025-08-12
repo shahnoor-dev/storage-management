@@ -107,8 +107,10 @@ export default function DashboardLayout({
                                 isShowOnMobile={isShowOnMobile}
                                 setIsShowOnMobile={setIsShowOnMobile}
                             />
-                            <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-                                {children}
+                            <main className="grid flex-1 items-start gap-4 bg-accent min-h-[calc(100vh-132px)] max-h-[calc(100vh-132px)] w-[calc(100vw-356px)] p-8 rounded-[30px]">
+                                <div className="min-h-[calc(100vh-196px)] max-h-[calc(100vh-196px)] rounded-[24px] max-w-[calc(100vw-388px)] overflow-y-scroll scrollbar-hide">
+                                    {children}
+                                </div>
                             </main>
                             {/* Render the progress component */}
                             <UploadProgress

@@ -49,7 +49,7 @@ export default function Header({ isCollapsed, toggleSidebar, onUpload, isShowOnM
     }
 
     return (
-        <header className="sticky top-0 z-30 flex h-24 items-center gap-4 border-b bg-background px-4 py-8 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+        <header className="sticky top-0 z-30 flex h-24 items-center gap-4 border-b bg-background px-4 py-6 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
             <Button size="theme" variant="theme" className="sm:hidden" onClick={handleShowMobileMenu} >
                 <Menu className="!h-5 !w-5" />
             </Button>
