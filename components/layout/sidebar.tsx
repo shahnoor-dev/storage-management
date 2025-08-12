@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import {
     LayoutDashboard,
     FileText,
@@ -47,17 +48,39 @@ const settingsNavItems = [
 
 interface SidebarProps {
     isCollapsed: boolean;
+    setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
     isShowOnMobile: boolean;
     setIsShowOnMobile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Sidebar({ isCollapsed, isShowOnMobile, setIsShowOnMobile }: SidebarProps) {
+export default function Sidebar({ isCollapsed, setIsCollapsed, isShowOnMobile, setIsShowOnMobile }: SidebarProps) {
     const pathname = usePathname();
     const isSettingsPage = pathname.startsWith('/account') || pathname.startsWith('/recent') || pathname.startsWith('/invite') || pathname.startsWith('/trash') || pathname.startsWith('/history');
 
     const handleShowMobileMenu = () => {
         setIsShowOnMobile(() => false);
     }
+
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+
+            if (width < 640) {
+                setIsCollapsed(false);
+            } else if (width < 1024) {
+                setIsCollapsed(true);
+            } else {
+                setIsCollapsed(false);
+            }
+        };
+
+        // Run on mount
+        handleResize();
+
+        // Listen for window resize
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, [setIsCollapsed]);
 
     return (
         <>
@@ -196,8 +219,8 @@ export default function Sidebar({ isCollapsed, isShowOnMobile, setIsShowOnMobile
                                 </div>
                             ) : (
                                 <div className="flex flex-col gap-4">
-                                    <Button variant="outline" className="w-full text-red-500 hover:text-red-600">
-                                        <LogOut className="mr-2 h-5 w-5" />
+                                    <Button variant="logout" size="logout" className="w-full">
+                                        <LogOut className="mr-2 !h-5 !w-5" />
                                         Logout
                                     </Button>
                                 </div>

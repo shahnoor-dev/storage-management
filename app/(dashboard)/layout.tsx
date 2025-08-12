@@ -93,7 +93,7 @@ export default function DashboardLayout({
             {isClient ? (
                 <TooltipProvider delayDuration={0}>
                     <div className="flex min-h-screen w-full flex-col">
-                        <Sidebar isCollapsed={isCollapsed} isShowOnMobile={isShowOnMobile} setIsShowOnMobile={setIsShowOnMobile} />
+                        <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} isShowOnMobile={isShowOnMobile} setIsShowOnMobile={setIsShowOnMobile} />
                         <div
                             className={cn(
                                 "flex flex-col sm:gap-4 sm:py-4 transition-all duration-300",
