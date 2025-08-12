@@ -49,26 +49,26 @@ export default function Header({ isCollapsed, toggleSidebar, onUpload, isShowOnM
     }
 
     return (
-        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-            <Button size="icon" variant="outline" className="sm:hidden" onClick={handleShowMobileMenu} >
-                <Menu className="h-5 w-5" />
+        <header className="sticky top-0 z-30 flex h-24 items-center gap-4 border-b bg-background px-4 py-8 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+            <Button size="theme" variant="theme" className="sm:hidden" onClick={handleShowMobileMenu} >
+                <Menu className="!h-5 !w-5" />
             </Button>
 
             <Button
-                variant="outline"
-                size="icon"
+                variant="theme"
+                size="theme"
                 className="hidden sm:flex"
                 onClick={toggleSidebar}
             >
-                {isCollapsed ? <PanelRightClose className="h-5 w-5" /> : <PanelLeftClose className="h-5 w-5" />}
+                {isCollapsed ? <PanelRightClose className="!h-5 !w-5" /> : <PanelLeftClose className="!h-5 !w-5" />}
             </Button>
 
             <div className="relative flex-1 md:grow-0">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Search className="absolute left-4 top-4 !h-5 !w-5 text-light-01" />
                 <Input
                     type="search"
                     placeholder="Search..."
-                    className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[520px]"
+                    className="w-full sm:w-[200px] md:w-[320px] xl:w-[520px]"
                 />
             </div>
             {/* Hidden file input for uploads */}
@@ -79,14 +79,14 @@ export default function Header({ isCollapsed, toggleSidebar, onUpload, isShowOnM
                 className="hidden"
                 onChange={handleFileChange}
             />
-            <Button variant="default" className="ml-auto" onClick={handleUploadClick}>
-                <Upload className="mr-2 h-4 w-4" />
-                Upload
+            <Button variant="theme" size="theme" className="sm:px-6 ml-auto" onClick={handleUploadClick}>
+                <Upload className="sm:mr-2 !h-5 !w-5" />
+                <span className="hidden sm:block">Upload</span>
             </Button>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="icon" className="overflow-hidden rounded-full">
-                        <Image src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width={36} height={36} alt="Avatar" className="overflow-hidden rounded-full object-cover" />
+                    <Button variant="theme" size="theme" className="p-0">
+                        <Image src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width={52} height={52} alt="Avatar" className="overflow-hidden h-13 w-13 shadow-lg rounded-full object-cover" />
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48 p-2">

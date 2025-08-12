@@ -96,7 +96,7 @@ export default function DashboardLayout({
                         <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} isShowOnMobile={isShowOnMobile} setIsShowOnMobile={setIsShowOnMobile} />
                         <div
                             className={cn(
-                                "flex flex-col sm:gap-4 sm:py-4 transition-all duration-300",
+                                "flex flex-col transition-all duration-300",
                                 isCollapsed ? "sm:pl-14" : "sm:pl-81"
                             )}
                         >
