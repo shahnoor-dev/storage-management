@@ -107,8 +107,8 @@ export default function DashboardLayout({
                                 isShowOnMobile={isShowOnMobile}
                                 setIsShowOnMobile={setIsShowOnMobile}
                             />
-                            <main className={cn("grid flex-1 items-start gap-4 bg-accent min-h-[calc(100vh-108px)] sm:min-h-[calc(100vh-132px)] max-h-[calc(100vh-108px)] sm:max-h-[calc(100vh-132px)] p-3 sm:p-8 rounded-[30px]", isCollapsed ? "w-[calc(100vw-116px)]": "mx-auto w-[calc(100vw-24px)] sm:w-[calc(100vw-356px)]")}>
-                                <div className="min-h-[calc(100vh-132px)] max-h-[calc(100vh-132px)] sm:min-h-[calc(100vh-196px)] sm:max-h-[calc(100vh-196px)] rounded-[24px] overflow-y-scroll scrollbar-hide">
+                            <main className={cn("grid flex-1 items-start gap-4 bg-accent min-h-[calc(100vh-108px)] sm:min-h-[calc(100vh-132px)] max-h-[calc(100vh-108px)] sm:max-h-[calc(100vh-132px)] px-0 py-3 sm:py-8 sm:px-4 rounded-[30px]", isCollapsed ? "w-[calc(100vw-116px)]": "mx-auto w-[calc(100vw-24px)] sm:w-[calc(100vw-356px)]")}>
+                                <div className="min-h-[calc(100vh-132px)] max-h-[calc(100vh-132px)] sm:min-h-[calc(100vh-196px)] sm:max-h-[calc(100vh-196px)] px-3 sm:px-4 rounded-[24px] overflow-y-scroll scrollbar-hide">
                                     {children}
                                 </div>
                             </main>

@@ -12,6 +12,8 @@
   --color-accent-green: #3DD9B3;
   --color-accent-pink: #EEA8FD;
   --color-accent-red: #FF7474;
+  --breakpoint-ml: 56rem;
+  --breakpoint-xs: 32rem;
   --font-mono: var(--font-geist-mono);
   --color-background: var(--background);
   --color-foreground: var(--foreground);

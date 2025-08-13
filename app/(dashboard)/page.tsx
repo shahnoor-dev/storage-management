@@ -59,13 +59,13 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-4">
-      
+    <div className="flex flex-col lg:flex-row gap-4">
+
       {/* Main Content Area */}
-      <div className="md:w-1/2 flex flex-col gap-4">
-        
-        <Card className="bg-default-band text-white flex-1 min-w-[300px]">
-          <CardContent className="flex items-center p-6 gap-4">
+      <div className="sm:w-max sm:min-w-1/3 grid grid-flow-col grid-rows-5 xs:grid-rows-3 ml:grid-rows-2 lg:grid-rows-3 2xl:grid-rows-2 flex-none gap-3 sm:gap-4">
+
+        <Card className="bg-default-band text-white col-span-2 min-w-[300px]">
+          <CardContent className="flex items-center flex-wrap p-6 gap-4">
             <div className="relative h-40 w-40">
               <StorageChart data={chartData} />
               <div className="absolute inset-0 flex flex-col items-center justify-center">
@@ -79,20 +79,16 @@ export default function Dashboard() {
             </div>
           </CardContent>
         </Card>
-
-        <div className="flex gap-6 flex-wrap">
-          {storageItems.map((item) => (
+        {storageItems.map((item) => (
           <div key={item.title}>
             <StorageItemCard item={item} />
           </div>
         ))}
-        </div>
 
       </div>
 
       {/* Right Sidebar Area */}
-      <div className="md:w-1/2 flex flex-col gap-4">
-        
+      <div className="md:w-full flex flex-col gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>Contact</CardTitle>

@@ -67,7 +67,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isShowOnMobile, s
 
             if (width < 640) {
                 setIsCollapsed(false);
-            } else if (width < 1024) {
+            } else if (width < 1280) {
                 setIsCollapsed(true);
             } else {
                 setIsCollapsed(false);

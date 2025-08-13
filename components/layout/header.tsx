@@ -79,7 +79,7 @@ export default function Header({ isCollapsed, toggleSidebar, onUpload, isShowOnM
                 className="hidden"
                 onChange={handleFileChange}
             />
-            <Button variant="theme" size="theme" className="sm:px-6 ml-auto" onClick={handleUploadClick}>
+            <Button variant="theme" size="theme" className="sm:px-6 ml-auto bg-default-band text-white" onClick={handleUploadClick}>
                 <Upload className="sm:mr-2 !h-5 !w-5" />
                 <span className="hidden sm:block">Upload</span>
             </Button>

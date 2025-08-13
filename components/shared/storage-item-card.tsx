@@ -20,7 +20,7 @@ export function StorageItemCard({ item }: StorageItemCardProps) {
   return (
     <div className="relative pt-8 w-[226px] h-[233px]">
       {/* Overlapping Icon with custom background */}
-      <div className="absolute top-0 left-1">
+      <div className="absolute top-2 left-1">
         <div className={cn("w-16.5 h-16.5 rounded-full relative flex items-center justify-center", item.color)}>
             {/* Soft outer glow */}
             <div className={cn("absolute w-full h-full rounded-full opacity-50 blur-md", item.color)} />
