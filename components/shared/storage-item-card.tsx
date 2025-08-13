@@ -18,20 +18,20 @@ interface StorageItemCardProps {
 
 export function StorageItemCard({ item }: StorageItemCardProps) {
   return (
-    <Card className="relative pt-8">
+    <div className="relative pt-8 w-[226px] h-[233px]">
       {/* Overlapping Icon with custom background */}
-      <div className="absolute -top-5 left-5">
-        <div className={cn("w-16 h-16 rounded-full relative flex items-center justify-center", item.color)}>
+      <div className="absolute top-0 left-1">
+        <div className={cn("w-16.5 h-16.5 rounded-full relative flex items-center justify-center", item.color)}>
             {/* Soft outer glow */}
             <div className={cn("absolute w-full h-full rounded-full opacity-50 blur-md", item.color)} />
             {/* Main icon */}
-            <item.icon className={cn("h-7 w-7 z-10", item.iconColor)} />
+            <item.icon className={cn("h-7 w-7 z-10 text-white")} />
         </div>
       </div>
 
-      <CardContent className="flex flex-col items-center text-center space-y-2 pt-4">
+      <div className="flex flex-col items-center justify-center text-center space-y-2 pt-4 bg-[url('/img/icons/card-shape.svg')] bg-no-repeat w-full h-full bg-[bottom_center] bg-contain p-3">
         {/* Size (moved to top right) */}
-        <div className="absolute top-4 right-4 text-sm font-medium text-gray-600">{item.size}</div>
+        <div className="absolute top-12 right-6 text-sm font-medium text-gray-600">{item.size}</div>
         
         {/* Title */}
         <div className="text-lg font-bold pt-4">{item.title}</div>
@@ -42,7 +42,7 @@ export function StorageItemCard({ item }: StorageItemCardProps) {
         {/* Last Update */}
         <p className="text-xs text-gray-400 pt-2">Last update</p>
         <p className="text-sm font-semibold text-gray-700">{item.lastUpdate}</p>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

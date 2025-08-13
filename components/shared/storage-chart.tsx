@@ -14,17 +14,17 @@ export function StorageChart({ data }: StorageChartProps) {
   return (
     <ResponsiveContainer width="100%" height={160}>
       <RadialBarChart
-        innerRadius="85%"
+        innerRadius="80%"
         outerRadius="100%"
-        barSize={10}
+        barSize={20}
         data={data}
-        startAngle={90}
-        endAngle={-270}
+        startAngle={245}
+        endAngle={-65}
       >
         {/* This axis creates the background track */}
         <PolarAngleAxis 
             type="number" 
-            domain={[0, 100]} 
+            domain={[0, 90]} 
             angleAxisId={0} 
             tick={false} 
         />

@@ -139,9 +139,9 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isShowOnMobile, s
                                             <TooltipTrigger asChild>
                                                 <Link
                                                     href={item.href}
-                                                    className={cn("flex h-13 w-13 items-center justify-center rounded-full transition-all", isActive ? 'bg-default-band text-white hover:text-white' : 'text-muted-foreground hover:bg-accent')}
+                                                    className={cn("flex h-13 w-13 items-center justify-center rounded-full transition-all", isActive ? 'bg-default-band/50 text-white hover:text-white' : 'text-muted-foreground hover:bg-accent')}
                                                 >
-                                                    <div className={cn(`h-8 w-8 p-[6px] bg-${item.iconBg} rounded-full`)}>
+                                                    <div className={cn(`h-10 w-10 p-[10px] bg-${item.iconBg} rounded-full`)}>
                                                         <item.icon className={cn("h-5 w-5 text-white")} />
                                                     </div>
                                                     <span className="sr-only">{item.name}</span>
@@ -210,7 +210,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isShowOnMobile, s
                                 <div className="flex flex-col gap-2 items-center">
                                     <Tooltip>
                                         <TooltipTrigger asChild>
-                                            <Button variant="ghost" size="icon" className="h-9 w-9 rounded-lg text-red-500 hover:bg-accent hover:text-red-600">
+                                            <Button variant="logout" size="logout" className="text-accent-red/90 w-13 hover:bg-accent hover:text-accent-red">
                                                 <LogOut className="h-5 w-5" />
                                             </Button>
                                         </TooltipTrigger>

@@ -68,7 +68,7 @@ export default function Header({ isCollapsed, toggleSidebar, onUpload, isShowOnM
                 <Input
                     type="search"
                     placeholder="Search..."
-                    className="w-full sm:w-[200px] md:w-[320px] xl:w-[520px]"
+                    className="w-full sm:w-[200px] md:w-[320px] xl:w-[520px] pl-12 shadow-lg"
                 />
             </div>
             {/* Hidden file input for uploads */}
